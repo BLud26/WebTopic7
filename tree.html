@@ -152,6 +152,11 @@
       treeTypeSelect.classList.add('error')
     }
 
+    if (errors.length > 0) {
+      alert(errors.join('\n'))
+      return
+    }
+
     // TODO - If there are no errors, use a template string to display an order
     // summary in the order summary paragraph.
 
