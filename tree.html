@@ -104,7 +104,18 @@
     // There's a style for input.error and select.error defined in the styles (in the head)
     // which will be applied if you give the class .error to any elements on the page.
     // Make sure you remove this class when the form is completed correctly.
+    let zipcodeNumber = Number(zipCode)
 
+    if (zipCode.length === 0) {
+      errors.push('Enter the zip code.')
+      zipcodeInput.classList.add('error')
+    } else if (isNaN(zipCode) || zipCode.length !== 5 {
+      errors.push('The zip code must be a 5 digit number.')
+      zipcodeInput.classList.remove('error')
+    } else if (zipcodeNumber < 55001 || zipcodeNumber > 56763) {
+      errors.push('The zip code must be between 55001 and 56763.')
+      zipcodeInput.classList.add('error')
+    }
 
     let errors = []
 
@@ -144,6 +155,7 @@
     }
 
   })
+
 
 
 
