@@ -163,6 +163,7 @@
     }
 
     if (errors.length > 0) {
+      orderSummaryParagraph.innerHTML = ''
       alert(errors.join('\n'))
       return
     }
