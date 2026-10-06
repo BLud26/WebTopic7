@@ -107,31 +107,66 @@
 </div>
 
 <script>
-    const registerButton = document.querySelector('#register-button');
-    const errorMessage = document.querySelector('#error-message');
 
-    registerButton.addEventListener('click', function (event) {
+        const registerButton = document.querySelector('#register-button');
+        const errorMessage = document.querySelector('#error-message');
+
+        registerButton.addEventListener('click', function (event) {
         event.preventDefault(); // stop the form from submitting and reloading the page
 
         // Read the values
         const name = document.querySelector('#name').value.trim();
         const password = document.querySelector('#password').value;
         const email = document.querySelector('#email').value.trim();
-        const tShirtSize = document.querySelector('#tshirt-size').value;
-        const dateOfBirth = document.querySelector('#date-of-birth').value;
-        const receiveEmailUpdates = document.querySelector('#email-updates').checked;
-        const specialRequests = document.querySelector('#special-requests').value.trim();
+        const tShirtSize = document.querySelector('#shirt-size').value;
+        const dateOfBirth = document.querySelector('#birth-date').value;
+        const specialRequests = document.querySelector('#requests').value.trim();
+
+        // Radio buttons: true if Yes is selected, false if No is selected
+        const updatesYes = document.querySelector('#updates-yes').checked;
+        const updatesNo = document.querySelector('#updates-no').checked;
+        const receiveEmailUpdates = updatesYes;
 
         // Build the sessions array from the two checkboxes
         const sessionsAttended = [];
         if (document.querySelector('#morning').checked) {
-            sessionsAttended.push('morning');
-        }
+        sessionsAttended.push('morning');
+    }
         if (document.querySelector('#afternoon').checked) {
-            sessionsAttended.push('afternoon');
-        }
+        sessionsAttended.push('afternoon');
+    }
 
+        // Validate
+        const errors = [];
+        if (name === '') errors.push('Name is required.');
+        if (password === '') errors.push('Password is required.');
+        if (email === '') errors.push('Email is required.');
+        if (tShirtSize === '') errors.push('Please choose a t-shirt size.');
+        if (dateOfBirth === '') errors.push('Date of birth is required.');
+        if (!updatesYes && !updatesNo) errors.push('Please choose yes or no for email updates.');
+        if (sessionsAttended.length === 0) errors.push('Select at least one session.');
+
+        if (errors.length > 0) {
+        errorMessage.textContent = errors.join(' ');
+        return; // stop here, form is incomplete
+    }
+        errorMessage.textContent = ''; // clear any old error
+
+        // Build and log the registration object
+        const registration = {
+        name: name,
+        password: password,
+        email: email,
+        tShirtSize: tShirtSize,
+        dateOfBirth: dateOfBirth,
+        receiveEmailUpdates: receiveEmailUpdates,
+        sessionsAttended: sessionsAttended,
+        specialRequests: specialRequests
+    };
+
+        console.log(registration);
     });
+
 </script>
 
 </body>
