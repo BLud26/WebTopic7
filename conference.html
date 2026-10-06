@@ -96,7 +96,8 @@
                 <textarea class="form-control" id="requests" name="requests" rows="7" cols="70"></textarea>
             </div>
 
-            <input class="btn btn-primary" id="submit" name="submit" value="Register">
+            <p id="error-message" class="text-danger"></p>
+            <button id="register-button" class="btn btn-primary">Register</button>
 
             <p id="confirmation" class="mt-3 text-success"></p>
 
@@ -106,9 +107,30 @@
 </div>
 
 <script>
-    document.getElementById("registration-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        document.getElementById("confirmation").textContent = "Form submitted";
+    const registerButton = document.querySelector('#register-button');
+    const errorMessage = document.querySelector('#error-message');
+
+    registerButton.addEventListener('click', function (event) {
+        event.preventDefault(); // stop the form from submitting and reloading the page
+
+        // Read the values
+        const name = document.querySelector('#name').value.trim();
+        const password = document.querySelector('#password').value;
+        const email = document.querySelector('#email').value.trim();
+        const tShirtSize = document.querySelector('#tshirt-size').value;
+        const dateOfBirth = document.querySelector('#date-of-birth').value;
+        const receiveEmailUpdates = document.querySelector('#email-updates').checked;
+        const specialRequests = document.querySelector('#special-requests').value.trim();
+
+        // Build the sessions array from the two checkboxes
+        const sessionsAttended = [];
+        if (document.querySelector('#morning').checked) {
+            sessionsAttended.push('morning');
+        }
+        if (document.querySelector('#afternoon').checked) {
+            sessionsAttended.push('afternoon');
+        }
+
     });
 </script>
 
