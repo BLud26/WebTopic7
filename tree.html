@@ -57,7 +57,7 @@
 <h2>Order Summary</h2>
 
 <p id="order-summary">
-  <!-- TODO Use JavaScript to display the order information,
+  <!-- Use JavaScript to display the order information,
       only if all the required information is entered  -->
 </p>
 
@@ -70,7 +70,7 @@
   let homeownerStreetNameInput = document.querySelector('#homeowner-street-name')
   let treeTypeSelect = document.querySelector('#tree-type')
 
-  // the todo was completed here
+
   let cityInput = document.querySelector('#city')
   let zipcodeInput = document.querySelector('#zipcode')
 
@@ -81,7 +81,7 @@
   submitButton.addEventListener('click', function() {
 
     let name = homeownerNameInput.value.trim()
-    let houseNumber = homeownerHouseNumberInput.value
+    let houseNumber = homeownerHouseNumberInput.value.trim()
     let streetName = homeownerStreetNameInput.value.trim()
     let treeType = treeTypeSelect.value
 
@@ -105,7 +105,7 @@
       cityInput.classList.add('error')
     }
 
-    // TODO Validate the zipcode is in the range 55001 and 56763.
+    // Validate the zipcode is in the range 55001 and 56763.
     // to check that the zip code is in Minnesota.
     // Make sure your script doesn't accept non-numeric input for the zip code.
 
@@ -168,17 +168,14 @@
       return
     }
 
-    // TODO - If there are no errors, use a template string to display an order
-    // summary in the order summary paragraph.
 
+    // summary in the order summary paragraph.
     orderSummaryParagraph.innerHTML = `Order for ${name}: one ${treeType} tree,
     to be delivered to ${houseNumber} ${streetName},
     ${city}, Minnesota ${zipCode}.`
 
 
   })
-
-
 
 
 </script>
