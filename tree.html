@@ -160,6 +160,10 @@
     // TODO - If there are no errors, use a template string to display an order
     // summary in the order summary paragraph.
 
+    orderSummaryParagraph.innerHTML = `Order for ${name}: one ${treeType} tree,
+    to be delivered to ${houseNumber} ${streetName},
+    ${city}, Minnesota ${zipCode}.`
+
     // Check that a city was entered
     if (city.length === 0) {
       errors.push('Enter the city name.')
