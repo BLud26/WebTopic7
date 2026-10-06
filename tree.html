@@ -104,6 +104,8 @@
     // There's a style for input.error and select.error defined in the styles (in the head)
     // which will be applied if you give the class .error to any elements on the page.
     // Make sure you remove this class when the form is completed correctly.
+
+    // Check the zip code is a five-digit number in the correct range of numbers
     let zipcodeNumber = Number(zipCode)
 
     if (zipCode.length === 0) {
@@ -143,6 +145,11 @@
     if (streetName.length === 0) {
       errors.push('Enter the street name.')
       homeownerStreetNameInput.classList.add('error')
+    }
+
+    if (treeType.length === 0) {
+      errors.push('Select a tree type.')
+      treeTypeSelect.classList.add('error')
     }
 
     // TODO - If there are no errors, use a template string to display an order
