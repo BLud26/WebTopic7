@@ -80,9 +80,9 @@
 
   submitButton.addEventListener('click', function() {
 
-    let name = homeownerNameInput.value
+    let name = homeownerNameInput.value.trim()
     let houseNumber = homeownerHouseNumberInput.value
-    let streetName = homeownerStreetNameInput.value
+    let streetName = homeownerStreetNameInput.value.trim()
     let treeType = treeTypeSelect.value
 
     //
@@ -90,6 +90,12 @@
     //
     let zipCode = zipcodeInput.value.trim()
     let errors = []
+    homeownerNameInput.classList.remove('error')
+    homeownerHouseNumberInput.classList.remove('error')
+    homeownerStreetNameInput.classList.remove('error')
+    cityInput.classList.remove('error')
+    zipcodeInput.classList.remove('error')
+    treeTypeSelect.classList.remove('error')
     //
     //  - check they all have a value
 
