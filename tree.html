@@ -91,10 +91,13 @@
     let zipCode = zipcodeInput.value.trim()
     //
     //  - check they all have a value
+
+    // Check that a city was entered
     if (city.length === 0) {
       errors.push('Enter the city.')
       cityInput.classList.add('error')
     }
+
     // TODO Validate the zipcode is in the range 55001 and 56763.
     // to check that the zip code is in Minnesota.
     // Make sure your script doesn't accept non-numeric input for the zip code.
@@ -164,11 +167,6 @@
     to be delivered to ${houseNumber} ${streetName},
     ${city}, Minnesota ${zipCode}.`
 
-    // Check that a city was entered
-    if (city.length === 0) {
-      errors.push('Enter the city name.')
-      cityInput.classList.add('error')
-    }
 
   })
 
