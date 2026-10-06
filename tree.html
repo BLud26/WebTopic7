@@ -89,6 +89,7 @@
     let city = cityInput.value.trim()
     //
     let zipCode = zipcodeInput.value.trim()
+    let errors = []
     //
     //  - check they all have a value
 
@@ -122,7 +123,7 @@
       zipcodeInput.classList.add('error')
     }
 
-    let errors = []
+
 
     // If a form element has not been completed, or if the data is not valid,
     // add an error message to the errors array. (Hint: use push to add to the end of the array)
