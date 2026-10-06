@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conference Registration</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- adding our styles after bootstrap -->
+
+    <link href="conference-styles.css" rel="stylesheet">
+
+</head>
+<body class="m-5">
+
+<div class="header bg-primary-subtle m-4 p-4 rounded-2 text-center">
+    <h1>Conference Registration</h1>
+</div>
+
+<div class="row m-4">
+
+    <div class="col-md-4">
+        <h2>Details</h2>
+
+        <p>Register below to reserve your spot. All attendees receive a free t-shirt.</p>
+        <p>Fields marked required must be filled in before you can submit.</p>
+    </div>
+
+    <div class="col-md-8">
+        <form id="registration-form">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" id="name" name="name" type="text" maxlength="70" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" id="email" name="email" type="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="shirt-size">T-shirt size</label>
+                <select class="form-select" id="shirt-size" name="shirt-size" required>
+                    <option value="">Choose a size</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="birth-date">Date of birth</label>
+                <input class="form-control" id="birth-date" name="birth-date" type="date" required>
+            </div>
+
+            <fieldset class="mb-3">
+                <legend class="fs-6">Receive email updates from conference sponsors?</legend>
+
+                <div class="form-check">
+                    <input class="form-check-input" id="updates-yes" name="email-updates" type="radio" value="yes" required>
+                    <label class="form-check-label" for="updates-yes">Yes</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" id="updates-no" name="email-updates" type="radio" value="no" required>
+                    <label class="form-check-label" for="updates-no">No</label>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-3">
+                <legend class="fs-6">Choose sessions</legend>
+
+                <div class="form-check">
+                    <input class="form-check-input" id="morning" name="sessions" type="checkbox" value="morning">
+                    <label class="form-check-label" for="morning">Morning session</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" id="afternoon" name="sessions" type="checkbox" value="afternoon">
+                    <label class="form-check-label" for="afternoon">Afternoon session</label>
+                </div>
+            </fieldset>
+
+            <div class="mb-3">
+                <label class="form-label" for="requests">Special requests</label>
+                <textarea class="form-control" id="requests" name="requests" rows="7" cols="70"></textarea>
+            </div>
+
+            <input class="btn btn-primary" id="submit" name="submit" value="Register">
+
+            <p id="confirmation" class="mt-3 text-success"></p>
+
+        </form>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("registration-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        document.getElementById("confirmation").textContent = "Form submitted";
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: darkcyan;
+    color: black;
+}
+
+.header {
+    font-weight: 600;
+}
+
+legend {
+    font-weight: 300;
+}
+
+form {
+    background-color: lightgray;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
