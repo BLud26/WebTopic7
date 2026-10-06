@@ -111,9 +111,9 @@
     if (zipCode.length === 0) {
       errors.push('Enter the zip code.')
       zipcodeInput.classList.add('error')
-    } else if (isNaN(zipCode) || zipCode.length !== 5 {
+    } else if (isNaN(zipCode) || zipCode.length !== 5) {
       errors.push('The zip code must be a 5 digit number.')
-      zipcodeInput.classList.remove('error')
+      zipcodeInput.classList.add('error')
     } else if (zipcodeNumber < 55001 || zipcodeNumber > 56763) {
       errors.push('The zip code must be between 55001 and 56763.')
       zipcodeInput.classList.add('error')
