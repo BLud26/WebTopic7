@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minnesota</title>
+
+    <style>
+        #previewPopup {
+            visibility: hidden;
+            border: 1px gray solid;
+            position: absolute;
+            font-size: smaller;
+            background: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Minnesota</h1>
+
+<p>Minnesota is a state in the <a class="page-preview-popup" href="https://en.wikipedia.org/wiki/Upper_Midwest">Upper Midwest</a>.
+    The largest city is <a class="page-preview-popup" href="https://en.wikipedia.org/wiki/Minneapolis">Minneapolis</a>.</p>
+
+<p>Minnesota is famous for lakes and contains part of the largest lake in the world by surface area,
+    <a class="page-preview-popup" href="https://en.wikipedia.org/wiki/Lake_Superior">Lake Superior<a>. Minnesota is often called the "Land of 10,000 Lakes."</a></a></p>
+
+<!-- CSS is used to set visibility: hidden so this popup is not seen unless we change the visibility with JavaScript.
+
+Even though there are 3 links (and could be any number of links) there is only one popup element.
+Only one popup will be shown at a time so we can re-use the same element. When the user mouses over a link, the popup
+will be moved to their mouse cursor location, and configured to show the link's text and image. -->
+<div id="previewPopup">
+    <div id="previewHTML"></div>
+    <img id="previewImage">  <!-- Can disregard warning about no source since we'll set the source with JavaScript -->
+</div>
+
+<script>
+
+    // Find the popup div, the preview text div, and image element within
+    let previewPopup = document.querySelector('#previewPopup')
+    let previewPopupHTML = previewPopup.querySelector('#previewHTML')
+    let previewImage = previewPopup.querySelector('#previewImage')
+
+    // Find all the popup links on the page.
+    let popupLinks = document.querySelectorAll('.page-preview-popup')
+
+    // For each popup link, and a mouseover listener. When a link is moused over, make a request
+    // to get the preview data from wikipedia, customize the popup content, and show the popup.
+
+    popupLinks.forEach( function(link) {
+        link.addEventListener('mouseover', function(event) {
+
+            console.log(link)
+
+            // Read the link's destination from its href property
+            let linkURL = link.href
+            console.log(linkURL)
+
+
+            // Get the href for the link, which will be in the form https://en.wikipedia.org/wiki/Upper_Midwest
+            // need the last part, e.g. "Upper_Midwest" so split by / - what do we get? An array of parts
+            // Get the last element from this array, store in new variable
+
+            // Break the URL apart at every / to get an array of its pieces
+            let linkParts = linkURL.split('/')
+            console.log(linkParts)
+            // The last piece of that array is the Wikipedia page title
+            let pageTitle = linkParts.pop() // Remove the last item in an array and save in new variable
+            console.log(pageTitle)
+
+            // Generate URL for popup data. The start is always the same, the end is the "Upper_Midwest" part
+            //  e.g. https://en.wikipedia.org/api/rest_v1/page/summary/Upper_Midwest
+            // Join the page title onto the end of the API address to make the request URL for this specific page
+            let previewURL = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + pageTitle //  what to add?
+
+            // make API request, wait for response.
+            fetch(previewURL).then( response => response.json() ).then( pagePreviewJson => {
+
+                console.log(pagePreviewJson)
+
+                // Process JSON to extract necessary data,
+                // page previewJson is an object
+                // Its extract_html property holds the page's summary paragraph as a string of HTML
+                let extractHTML = pagePreviewJson.extract_html
+                console.log(extractHTML)
+
+                // configure popup - set text and image
+
+                previewPopupHTML.innerHTML = extractHTML // setting the HTML to display text
+
+                // thumbnail is an object inside the JSON that describes the page's preview image (source, width, height)
+                let thumbnailImageInfo = pagePreviewJson.thumbnail
+                console.log(thumbnailImageInfo)
+                // source is the web address of the image file itself
+                let thumbnailImageURL = thumbnailImageInfo.source
+                console.log(thumbnailImageURL)
+                // Set the popup's <img> to that address so the browser loads and displays the image
+                previewImage.src = thumbnailImageURL
+
+
+                // position popup where mouse is
+                previewPopup.style.top = event.clientY + 'px'
+                previewPopup.style.left = event.clientX + 'px'
+
+                // make visible
+                previewPopup.style.visibility = 'visible'
+
+            })
+
+        })
+
+        link.addEventListener('mouseout', function () {
+            // hide popup and clear content
+            previewPopup.style.visibility = 'hidden'
+            previewPopupHTML.innerHTML = ''
+            previewImage.src = ''
+        })
+    })
+
+</script>
+
+
+
+</body>
+</html>
